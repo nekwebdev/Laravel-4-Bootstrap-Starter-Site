@@ -78,7 +78,7 @@ class AdminUsersController extends AdminController {
 		$mode = 'create';
 
 		// Show the page
-		return View::make('admin/users/create', compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'));
+		return View::make('admin/users/create_edit', compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'));
     }
 
     /**
@@ -152,7 +152,7 @@ class AdminUsersController extends AdminController {
         	// mode
         	$mode = 'edit';
 
-        	return View::make('admin/users/edit', compact('user', 'roles', 'permissions', 'title', 'mode'));
+        	return View::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'title', 'mode'));
         }
         else
         {
@@ -196,6 +196,10 @@ class AdminUsersController extends AdminController {
             } else {
                 unset($user->password);
                 unset($user->password_confirmation);
+            }
+            
+            if($user->confirmed == null) {
+                $user->confirmed = $oldUser->confirmed;
             }
 
             $user->prepareRules($oldUser, $user);
@@ -287,10 +291,10 @@ class AdminUsersController extends AdminController {
                             No
                         @endif')
 
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-mini">{{{ Lang::get(\'button.edit\') }}}</a>
+        ->add_column('actions', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-xs btn-default">{{{ Lang::get(\'button.edit\') }}}</a>
                                 @if($username == \'admin\')
                                 @else
-                                    <a href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-mini btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+                                    <a href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-xs btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
                                 @endif
             ')
 

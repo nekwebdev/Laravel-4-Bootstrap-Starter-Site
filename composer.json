@@ -11,11 +11,11 @@
     ],
 	"require": {
 		"laravel/framework": "4.0.*",
-		"twitter/bootstrap": "dev-master",
+		"twbs/bootstrap": "dev-master",
 		"zizaco/confide": "dev-master",
 		"zizaco/entrust": "dev-master",
 		"jasonlewis/basset": "dev-master",
-		"robclancy/presenter": "1.0.*",
+		"robclancy/presenter": "1.2.*",
         "j20/php-uuid": "dev-master",
         "bllim/datatables": "*"
 	},
@@ -24,7 +24,7 @@
         "mockery/mockery": "dev-master@dev",
         "summerstreet/woodling": "0.1.*",
         "barryvdh/laravel-ide-helper": "dev-master",
-        "leafo/lessphp": "v0.3.9",
+        "leafo/lessphp": "v0.4.0",
         "natxet/CssMin": "dev-master",
         "lmammino/jsmin4assetic": "1.0.*"
 	},

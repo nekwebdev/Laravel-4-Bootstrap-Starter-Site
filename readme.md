@@ -9,7 +9,7 @@ It began as a fork of [laravel4-starter-kit](https://github.com/brunogaspar/lara
 
 ## Features
 
-* Twitter Bootstrap 2.3.0
+* Twitter Bootstrap 3.0.0
 * Custom Error Pages
 	* 403 for forbidden page accesses
 	* 404 for not found pages
@@ -109,9 +109,12 @@ You will now be copying the initial configuration file inside this folder before
         'key' => 'YourSecretKey!!!',
 
         'providers' => array(
+        
+        [... Removed ...]
+        
         /* Uncomment for use in development */
-            'Way\Generators\GeneratorsServiceProvider', // Generators
-            'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
+    //     'Way\Generators\GeneratorsServiceProvider', // Generators
+    //     'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
 
         ),
 
@@ -241,8 +244,8 @@ To make it build the ide helpers automatically you'll want to modify the post-up
 
 ```
 		"post-update-cmd": [
-			"php artisan optimize",
-            "php artisan ide-helper:generate"
+			"php artisan ide-helper:generate",
+			"php artisan optimize"
 		]
 ```
 
@@ -273,6 +276,32 @@ You may need to recompile the assets for basset. This is easy to with one comman
 
 ```
 php artisan basset:build
+```
+
+### Site loading very slow
+
+Are you running Windows??
+
+Please try adjusting the basset configuration as show in this [comment](https://github.com/andrew13/Laravel-4-Bootstrap-Starter-Site/issues/148#issuecomment-22995288)
+
+In app/config/packages/jasonlewis/basset/config.php:
+
+```
+ $collection->directory('assets/js', function($collection)
+            {
+                $collection->javascript('//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js');
+                //$collection->add('bootstrap/bootstrap.js');
+                $collection->requireDirectory('../../../vendor/twbs/bootstrap/js');
+            })->apply('JsMin');
+```
+to:
+```
+ $collection->directory('assets/js', function($collection)
+            {
+                $collection->javascript('http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js');
+                $collection->add('bootstrap/bootstrap.js');
+                $collection->requireDirectory('../../../vendor/twbs/bootstrap/js');
+            })->apply('JsMin');
 ```
 
 -----
